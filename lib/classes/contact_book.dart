@@ -5,7 +5,9 @@ class ContactBook {
   static final ContactBook _shared = ContactBook._instance();
   factory ContactBook() => _shared;
 
-  List<Contact> _contacts = [];
+  final List<Contact> _contacts = [];
+
+  int get length => _contacts.length;
 
   void addContact(Contact contact) {
     _contacts.add(contact);
