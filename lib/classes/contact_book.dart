@@ -1,21 +1,25 @@
+import 'package:flutter/cupertino.dart';
+
 import 'contact.dart';
 
-class ContactBook {
-  ContactBook._instance();
+class ContactBook extends ValueNotifier<List<Contact>> {
+  ContactBook._instance() : super([]);
   static final ContactBook _shared = ContactBook._instance();
   factory ContactBook() => _shared;
 
-  final List<Contact> _contacts = [];
-
-  int get length => _contacts.length;
+  int get length => value.length;
 
   void addContact(Contact contact) {
-    _contacts.add(contact);
+    value.add(contact);
+    notifyListeners();
   }
 
   void removeContact(Contact contact) {
-    _contacts.remove(contact);
+    if(value.contains(contact)){
+      value.remove(contact);
+      notifyListeners();
+    }
   }
 
-  Contact? getContact(int index) => _contacts.length > index ? _contacts[index] : null;
+  Contact? getContact(int index) => value.length > index ? value[index] : null;
 }
