@@ -1,6 +1,5 @@
 import 'package:contact_app_01/screens/home/widgets/contact_tile.dart';
 import 'package:flutter/material.dart';
-import '../../classes/contact.dart';
 import '../../classes/contact_book.dart';
 
 class Home extends StatelessWidget{
@@ -15,8 +14,9 @@ class Home extends StatelessWidget{
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text(
-          'Contact',
+        title: Text(
+          'contact'.toUpperCase(),
+          style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
       body: CustomScrollView(
@@ -30,6 +30,12 @@ class Home extends StatelessWidget{
             ),
           )
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.of(context).pushNamed('/new'),
+        child: const Icon(
+          Icons.person_add_alt_1,
+        ),
       ),
     );
   }
