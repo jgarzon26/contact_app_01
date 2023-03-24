@@ -19,17 +19,21 @@ class Home extends StatelessWidget{
           style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
-      body: CustomScrollView(
-        slivers: [
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-                (context, index) => ContactTile(
-                  contact: contactBook.getContact(index)!,
+      body: ValueListenableBuilder(
+        valueListenable: contactBook,
+        builder: (context, value, child) =>
+            CustomScrollView(
+            slivers: [
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                    (context, index) => ContactTile(
+                      contact: value[index],
+                    ),
+                    childCount: value.length,
                 ),
-                childCount: contactBook.length,
-            ),
-          )
-        ],
+              )
+            ],
+          ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.of(context).pushNamed('/new'),
